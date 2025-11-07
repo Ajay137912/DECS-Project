@@ -193,8 +193,14 @@ int main() {
         int key = stoi(req.get_param_value("id"));
         bool cacheRemoved = inMemoryCache.remove(key);
         bool dbRemoved = deleteKeyFromDatabase(key);
-        if (cacheRemoved || dbRemoved)
-            res.set_content("Key deleted successfully.\n", "text/plain");
+        
+        if (dbRemoved){
+            if (cacheRemoved)
+                res.set_content("Key deleted successfully from cache and database.\n", "text/plain");
+            else
+                res.set_content("Key deletion failed in cache.\n", "text/plain");
+        }
+        
         else {
             res.status = 404;
             res.set_content("Error: Key not found.\n", "text/plain");
