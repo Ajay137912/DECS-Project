@@ -10,7 +10,7 @@
 using namespace std;
 using namespace httplib;
 
-#define CACHE_CAPACITY 10
+#define CACHE_CAPACITY 10000
 #define THREAD_POOL_SIZE 32
 
 class PostgresConnectionPool {
